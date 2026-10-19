@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>ATLAS · territorios compartidos</title>
+  <meta name="description" content="ATLAS: mapa participativo para leer los espacios verdes de Buenos Aires. Territorio testigo: Parque Ferroviario Colegiales.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ================= BARRA SUPERIOR (fija) ================= -->
+  <header class="topbar">
+    <a href="#intro" class="brand" aria-label="ATLAS, volver al inicio">
+      <svg class="wordmark" viewBox="0 0 250 50" aria-hidden="true"><use href="#wordmark"/></svg>
+      <span class="slashes">///</span>
+    </a>
+    <div class="live" id="live">
+      <span class="dot"></span> EN VIVO
+      <span class="mono" id="live-clock">--:--:--</span>
+      <span class="sep">·</span>
+      <span class="mono"><b id="live-people">0</b> personas</span>
+      <span class="sep hide-sm">·</span>
+      <span class="mono hide-sm"><b id="live-db">0</b> dB</span>
+      <span class="sep hide-sm">·</span>
+      <span class="mono hide-sm"><b id="live-sensors">0</b> sensores</span>
+    </div>
+    <nav class="topnav">
+      <a href="#city">Mapa</a>
+      <a href="#park">Parque</a>
+      <a href="#participa">Participá</a>
+    </nav>
+  </header>
+
+  <!-- ================= 1 · INTRO ================= -->
+  <section id="intro" class="scrolly" style="--len: 260vh">
+    <div class="stage">
+      <svg id="intro-svg" viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet" aria-label="Conflictos, necesidades y recursos se cruzan y forman ATLAS"></svg>
+      <div class="intro-copy" id="intro-copy">
+        <p class="kicker">LAB VIII · Fuentes · Oro · Zita</p>
+        <h1 class="sr-only">ATLAS</h1>
+        <svg class="wordmark big" viewBox="0 0 250 50" aria-hidden="true"><use href="#wordmark"/></svg>
+        <p class="lead">metodología participativa<br>para leer territorios compartidos</p>
+      </div>
+      <div class="scroll-hint" id="scroll-hint"><span>scrolleá</span><i></i></div>
+    </div>
+  </section>
+
+  <!-- ================= 2 · CIUDAD ================= -->
+  <section id="city" class="scrolly" style="--len: 620vh">
+    <div class="stage">
+      <svg id="city-svg" preserveAspectRatio="xMidYMid meet" aria-label="Mapa esquemático de la Ciudad de Buenos Aires"></svg>
+      <div class="city-legend" id="city-legend">
+        <span><i class="lg-shape act"></i> con lectura ATLAS</span>
+        <span><i class="lg-shape pend"></i> sin relevar · votalo</span>
+      </div>
+      <div class="zoom-ctrl" id="zoom-ctrl">
+        <button data-zoom="out" aria-label="Ver toda la ciudad">CABA</button>
+        <button data-zoom="in" aria-label="Acercar a Colegiales">Colegiales</button>
+      </div>
+      <div class="tip" id="city-tip" role="status"></div>
+    </div>
+    <div class="steps">
+      <article class="step"><p class="num">01</p><h2>Buenos Aires</h2><p>203 km², 48 barrios, 15 comunas. Una ciudad que todos usamos y que casi nadie lee completa.</p></article>
+      <article class="step"><p class="num">02</p><h2>Lo que la ordena</h2><p>Avenidas y vías de tren dibujan la estructura. Son los bordes, los cruces y las fronteras del día a día.</p></article>
+      <article class="step"><p class="num">03</p><h2>Lo que la llena</h2><p>Debajo, miles de manzanas. Ahí pasan las experiencias cotidianas, las regulaciones, los recursos y los intereses.</p></article>
+      <article class="step"><p class="num">04</p><h2>Lo que respira</h2><p>Los espacios verdes son territorios compartidos: ciudadanos, sector público y sector privado los usan, los regulan y los imaginan distinto.</p><p class="hint">Pasá el cursor por las figuras. Tocá una para elegir dónde informarte.</p></article>
+      <article class="step"><p class="num">05</p><h2>Territorio testigo</h2><p>Empezamos por uno: el <b>Parque Ferroviario Colegiales</b>, un ex playón del Mitre convertido en parque por etapas.</p><a class="btn" href="#park">Entrar al parque →</a></article>
+    </div>
+  </section>
+
+  <!-- ================= 3 · PARQUE + CAPAS ================= -->
+  <section id="park">
+    <div class="park-stage" id="park-stage">
+      <svg id="park-svg" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMid meet" aria-label="Plano esquemático del Parque Ferroviario Colegiales"></svg>
+      <div class="park-overlay" id="park-overlay"></div>
+      <div class="park-title" id="park-title">
+        <p class="kicker" id="park-kicker">Colegiales · Comuna 13</p>
+        <p class="layer-name" id="layer-name">Parque Ferroviario Colegiales</p>
+      </div>
+      <nav class="dock" id="dock" aria-label="Capas de información"></nav>
+      <figure class="minimap" id="minimap" title="Volver al mapa de la ciudad">
+        <svg id="minimap-svg" aria-hidden="true"></svg>
+        <figcaption>CABA · <span>zoom out ↗</span></figcaption>
+      </figure>
+      <div class="tip" id="park-tip" role="status"></div>
+    </div>
+    <div class="chapters" id="chapters">
+      <!-- Los capítulos se generan desde js/layers.js -->
+    </div>
+  </section>
+
+  <!-- ================= 4 · PARTICIPÁ ================= -->
+  <section id="participa">
+    <div class="participa-inner">
+      <div class="participa-copy">
+        <p class="kicker">Recolectar · Procesar · Explorar</p>
+        <h2>Dejá tu marca en el territorio</h2>
+        <p>ATLAS se actualiza con cada aporte. Elegí una figura, tocá un punto del parque y contá qué pasa ahí.</p>
+        <div class="pin-types" id="pin-types" role="radiogroup" aria-label="Tipo de aporte"></div>
+        <label class="field">
+          <span>Tu aporte</span>
+          <input id="pin-text" type="text" maxlength="90" placeholder="Ej: falta sombra cerca de los juegos">
+        </label>
+        <p class="small muted" id="pin-count"></p>
+        <p class="small muted">En esta versión los aportes se guardan en tu navegador. En la versión conectada se comparten con toda la comunidad (ver README).</p>
+      </div>
+      <div class="participa-map">
+        <svg id="pin-svg" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMid meet" aria-label="Plano del parque para dejar aportes"></svg>
+      </div>
+    </div>
+    <footer class="footer">
+      <svg class="wordmark" viewBox="0 0 250 50" aria-hidden="true"><use href="#wordmark"/></svg>
+      <p>Información organizada · voces y tensiones visibles · criterios explícitos · decisiones fundamentadas</p>
+      <p class="small muted">Datos marcados <span class="tag real">real</span> tienen fuente verificada. Datos <span class="tag ej">ejemplo</span> son simulados hasta conectar sensores y relevamientos.</p>
+      <p class="small muted">LAB VIII · Fuentes · Oro · Zita · 2026</p>
+    </footer>
+  </section>
+
+  <!-- ================= SÍMBOLOS SVG REUTILIZABLES ================= -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <!-- Logotipo ATLAS: Δ T L Δ S -->
+      <symbol id="wordmark" viewBox="0 0 250 50">
+        <g fill="none" stroke="currentColor" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 44 L26 6 L46 44 Z"/>
+          <path d="M60 6 H94 M77 6 V44"/>
+          <path d="M110 6 V44 H138"/>
+          <path d="M152 44 L172 6 L192 44 Z"/>
+          <path d="M240 6 H215 a9.5 9.5 0 0 0 0 19 H229 a9.5 9.5 0 0 1 0 19 H204"/>
+        </g>
+      </symbol>
+      <!-- Filtro "boceto": líneas temblorosas, dibujadas a mano -->
+      <filter id="sketch" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n"/>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="6" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <line x1="0" y1="0" x2="0" y2="10" stroke="currentColor" stroke-width="2"/>
+      </pattern>
+    </defs>
+  </svg>
+
+  <!-- ================= SCRIPTS (sin build, abrir con Live Server) ================= -->
+  <script src="js/data.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/intro.js"></script>
+  <script src="js/city.js"></script>
+  <script src="js/park.js"></script>
+  <script src="js/layers.js"></script>
+  <script src="js/participa.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
